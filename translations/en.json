@@ -1,0 +1,55 @@
+{
+  "actions": {
+    "apply": "Apply",
+    "apply_close": "Apply & Close",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "refresh": "Refresh wallpapers",
+    "settings": "Settings",
+    "shuffle": "Shuffle",
+    "try_again": "Try again"
+  },
+  "errors": {
+    "file_missing": "The selected wallpaper no longer exists. Refresh the collection.",
+    "no_directory": "No wallpaper directory is configured in Noctalia.",
+    "read_failed": "The wallpaper directory could not be read."
+  },
+  "notifications": {
+    "applied": "Applied {name}"
+  },
+  "panel": {
+    "empty": "No supported images were found in the wallpaper directory.",
+    "live_preview": "Live preview",
+    "loading": "Scanning wallpapers…",
+    "no_directory": "Wallpaper directory unavailable"
+  },
+  "settings": {
+    "columns": {
+      "description": "Number of wallpaper cards in each row",
+      "label": "Grid columns"
+    },
+    "glyph": {
+      "label": "Widget glyph"
+    },
+    "image_extensions": {
+      "description": "Filename extensions treated as image wallpapers",
+      "label": "Image extensions"
+    },
+    "live_preview": {
+      "description": "Apply a wallpaper as soon as it is selected",
+      "label": "Live preview"
+    },
+    "sort_order": {
+      "description": "How wallpapers are ordered in the browser",
+      "label": "Sort order",
+      "name": "Name",
+      "newest": "Newest first",
+      "oldest": "Oldest first"
+    }
+  },
+  "title": "Wallcards",
+  "widget": {
+    "tooltip": "Open Wallcards"
+  }
+}

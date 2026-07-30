@@ -1,0 +1,67 @@
+id = "lgl/wallcards"
+name = "Wallcards"
+version = "0.1.0"
+plugin_api = 15
+author = "lgl"
+license = "MIT"
+dependencies = []
+tags = ["wallpaper", "theming"]
+icon = "cards"
+description = "Browse and apply local image wallpapers from a card-based panel."
+
+[[setting]]
+key = "live_preview"
+type = "bool"
+label_key = "settings.live_preview.label"
+description_key = "settings.live_preview.description"
+default = false
+
+[[setting]]
+key = "image_extensions"
+type = "string_list"
+label_key = "settings.image_extensions.label"
+description_key = "settings.image_extensions.description"
+default = ["png", "jpg", "jpeg", "webp"]
+
+[[setting]]
+key = "columns"
+type = "int"
+label_key = "settings.columns.label"
+description_key = "settings.columns.description"
+default = 3
+min = 2
+max = 5
+
+[[setting]]
+key = "sort_order"
+type = "select"
+label_key = "settings.sort_order.label"
+description_key = "settings.sort_order.description"
+default = "name"
+options = [
+  { value = "name", label_key = "settings.sort_order.name" },
+  { value = "newest", label_key = "settings.sort_order.newest" },
+  { value = "oldest", label_key = "settings.sort_order.oldest" },
+]
+
+[[widget]]
+id = "wallcards"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key = "glyph"
+  type = "glyph"
+  label_key = "settings.glyph.label"
+  default = "cards"
+
+[[service]]
+id = "scanner"
+entry = "service.luau"
+
+[[panel]]
+id = "browser"
+entry = "wallcards.luau"
+width = 960
+height = 760
+placement = "floating"
+position = "center"
