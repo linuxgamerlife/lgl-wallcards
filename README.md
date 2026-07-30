@@ -63,3 +63,13 @@ the configured wallpaper directory.
 - `PLAN.md` contains the phased v5 development plan.
 - `legacy-v4-plugins/wallcards/` is the behavior and design reference.
 - `official-plugins/example/` is the v5 API template.
+
+## Credits
+
+- The original Noctalia v4 Wallcards plugin was created by
+  [tonigineer](https://github.com/tonigineer).
+- The original design was inspired by
+  [ilyamiro's NixOS configuration](https://github.com/ilyamiro/nixos-configuration)
+  and [liixini's skwd](https://github.com/liixini/skwd).
+- The v5 implementation is built against the
+  [official Noctalia plugin examples](https://github.com/noctalia-dev/official-plugins).
