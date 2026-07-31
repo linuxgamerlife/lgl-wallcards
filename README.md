@@ -89,7 +89,7 @@ card transitions remain planned work.
 Clone the repository:
 
 ```sh
-git clone git@github.com:linuxgamerlife/lgl-wallcards.git
+git clone https://github.com/linuxgamerlife/lgl-wallcards.git
 cd lgl-wallcards
 ```
 
@@ -147,6 +147,22 @@ check the installed Noctalia version and update Noctalia before testing:
 ```sh
 noctalia --version
 ```
+
+## Removal
+
+Disable Wallcards before removing its local development link:
+
+```sh
+noctalia msg plugins disable lgl/wallcards
+unlink ~/.local/share/noctalia/plugins/lgl-wallcards
+```
+
+This removes Wallcards from Noctalia without deleting the cloned repository.
+Delete the clone separately if it is no longer needed.
+
+Wallcards may leave its generated `wallpapers.json` index in Noctalia's plugin
+data directory. No wallpaper images are stored or deleted by the removal
+commands above.
 
 ## IPC
 
