@@ -31,13 +31,66 @@ legacy stacked-card visual treatment remain planned work.
 
 ## Installation
 
-Place this directory in a configured Noctalia v5 plugin source, enable
-Wallcards in Settings, then add the `wallcards` widget to the bar.
+Clone the repository:
 
-The panel can also be opened directly:
+```sh
+git clone git@github.com:linuxgamerlife/lgl-wallcards.git
+cd lgl-wallcards
+```
+
+Lint the plugin before loading it:
+
+```sh
+noctalia plugins lint .
+```
+
+Expose the working copy through Noctalia's local development plugin directory:
+
+```sh
+mkdir -p ~/.local/share/noctalia/plugins
+ln -s "$(pwd)" ~/.local/share/noctalia/plugins/lgl-wallcards
+```
+
+If the link already exists, verify where it points:
+
+```sh
+readlink ~/.local/share/noctalia/plugins/lgl-wallcards
+```
+
+With Noctalia running, confirm that it discovered the plugin and enable it:
+
+```sh
+noctalia msg plugins list
+noctalia msg plugins enable lgl/wallcards
+```
+
+Open the browser directly for the first test:
 
 ```sh
 noctalia msg panel-toggle lgl/wallcards:browser
+```
+
+Then open **Settings → Plugins**, confirm that Wallcards is enabled, and add
+the `wallcards` widget through the bar's Add Widget interface.
+
+### Reloading During Development
+
+Changes made in the cloned repository are visible through the local symlink.
+If Noctalia does not reload a change automatically, disable and re-enable the
+plugin:
+
+```sh
+noctalia msg plugins disable lgl/wallcards
+noctalia msg plugins enable lgl/wallcards
+```
+
+### Compatibility
+
+Wallcards currently requires plugin API 15. If it appears as incompatible,
+check the installed Noctalia version and update Noctalia before testing:
+
+```sh
+noctalia --version
 ```
 
 ## IPC
