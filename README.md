@@ -4,6 +4,34 @@ Wallcards is an image-only wallpaper browser for Noctalia v5. It discovers
 images in Noctalia's configured wallpaper directory and presents them in a
 large card grid.
 
+## V5 Port Limitations
+
+This project is a functional adaptation of Wallcards for Noctalia v5, not a
+faithful reproduction of the original v4 interface. It has reached the
+practical limit of the current public v5 plugin API.
+
+Noctalia v5 plugins render host-owned, flex-based `ui.*` controls. The API does
+not currently expose the capabilities used by the original QML implementation:
+
+- custom full-screen plugin windows
+- absolute and overlapping card positioning
+- matrix and shear transforms
+- per-card movement and resizing animations
+- shader masks and other QML graphical effects
+- custom window entrance and exit animations
+- mouse-wheel callbacks inside a plugin panel
+- equivalent control over keyboard focus and panel input
+
+As a result, this version must behave and look like a standard Noctalia panel.
+Its colours, spacing, controls, and static card hierarchy can be refined, but
+the original stacked, sheared, animated, wheel-controlled experience cannot be
+recreated with the current API.
+
+A faithful port will require additional Noctalia v5 APIs for absolute layout,
+transforms, animation, and panel pointer-wheel events. Until then, the original
+v4 plugin remains the complete visual implementation and this project provides
+the simplified v5 alternative.
+
 ## Status
 
 This is an early v5 implementation. It currently supports:
