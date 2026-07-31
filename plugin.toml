@@ -1,6 +1,6 @@
 id = "lgl/wallcards"
 name = "Wallcards"
-version = "0.1.0"
+version = "0.1.1"
 plugin_api = 15
 author = "lgl"
 license = "MIT"
