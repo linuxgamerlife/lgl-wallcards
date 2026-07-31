@@ -10,7 +10,7 @@ This is an early v5 implementation. It currently supports:
 
 - PNG, JPEG, and WebP wallpapers
 - name and modification-time sorting
-- configurable grid columns and image extensions
+- configurable wallpaper directory and image extensions
 - previous, next, and shuffle navigation
 - selection highlighting
 - applying a wallpaper to all outputs
@@ -18,8 +18,8 @@ This is an early v5 implementation. It currently supports:
 - a persistent JSON wallpaper index
 - refresh through the panel, widget IPC, or service IPC
 
-Thumbnail generation, dominant-colour filtering, keyboard capture, and the
-legacy stacked-card visual treatment remain planned work.
+Thumbnail generation, dominant-colour filtering, keyboard capture, and animated
+card transitions remain planned work.
 
 ## Plugin
 

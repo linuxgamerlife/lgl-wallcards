@@ -10,11 +10,6 @@ local selectedIndex = 0
 local livePreview = noctalia.getConfig("live_preview") == true
 local render
 
-local function clampColumns()
-  local columns = tonumber(noctalia.getConfig("columns")) or 3
-  return math.max(2, math.min(5, math.floor(columns)))
-end
-
 local function basename(path)
   return path:match("([^/]+)$") or path
 end
@@ -157,15 +152,22 @@ local function controls()
   })
 end
 
-local function wallpaperTile(item, tileWidth)
-  local selected = item.path == selectedPath
-  return ui.column({ gap = 5, align = "center", flexGrow = 1, key = item.path }, {
+local function deckCard(item, offset)
+  local selected = offset == 0
+  local width = selected and 430 or 74
+  local height = selected and 390 or 350
+  return ui.column({
+    gap = 7,
+    align = "center",
+    key = item.path,
+    flexGrow = selected and 1 or 0,
+  }, {
     ui.image({
       path = item.path,
-      width = tileWidth,
-      height = 150,
+      width = width,
+      height = height,
       fit = "cover",
-      radius = 12,
+      radius = 14,
       border = selected and "primary" or "outline",
       borderWidth = selected and 3 or 1,
       onClick = function()
@@ -173,36 +175,39 @@ local function wallpaperTile(item, tileWidth)
       end,
     }),
     ui.label({
-      text = item.name,
-      fontSize = 11,
-      color = selected and "primary" or "on_surface_variant",
-      fontWeight = selected and "bold" or "normal",
+      text = selected and item.name or "",
+      fontSize = 12,
+      color = "on_surface",
+      fontWeight = "medium",
       maxLines = 1,
-      maxWidth = tileWidth,
+      maxWidth = width,
       textAlign = "center",
     }),
   })
 end
 
-local function wallpaperGrid()
-  local columns = clampColumns()
-  local tileWidth = math.floor((900 - ((columns - 1) * 12)) / columns)
-  local rows = {}
-  local index = 1
-  while index <= #items do
-    local children = {}
-    for _column = 1, columns do
-      local item = items[index]
-      if item ~= nil then
-        table.insert(children, wallpaperTile(item, tileWidth))
-        index += 1
-      else
-        table.insert(children, ui.spacer({ flexGrow = 1 }))
-      end
-    end
-    table.insert(rows, ui.row({ gap = 12, align = "start" }, children))
+local function wrappedIndex(index)
+  return ((index - 1) % #items) + 1
+end
+
+local function wallpaperDeck()
+  local cards = {}
+  for offset = -3, 3 do
+    local item = items[wrappedIndex(selectedIndex + offset)]
+    table.insert(cards, deckCard(item, offset))
   end
-  return ui.scroll({ flexGrow = 1, gap = 12, align = "stretch" }, rows)
+  return ui.column({ flexGrow = 1, gap = 14, align = "stretch", justify = "center" }, {
+    ui.row({ gap = 8, align = "center", justify = "center" }, cards),
+    ui.row({ align = "center", justify = "center", gap = 8 }, {
+      ui.label({
+        text = basename(selectedPath),
+        fontSize = 13,
+        fontWeight = "bold",
+        color = "on_surface",
+        maxLines = 1,
+      }),
+    }),
+  })
 end
 
 local function body()
@@ -224,7 +229,7 @@ local function body()
       ui.button({ glyph = "refresh", text = noctalia.tr("actions.refresh"), onClick = requestRefresh }),
     })
   end
-  return wallpaperGrid()
+  return wallpaperDeck()
 end
 
 render = function()

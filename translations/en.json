@@ -25,10 +25,6 @@
     "no_directory": "Wallpaper directory unavailable"
   },
   "settings": {
-    "columns": {
-      "description": "Number of wallpaper cards in each row",
-      "label": "Grid columns"
-    },
     "glyph": {
       "label": "Widget glyph"
     },
@@ -39,6 +35,10 @@
     "live_preview": {
       "description": "Apply a wallpaper as soon as it is selected",
       "label": "Live preview"
+    },
+    "wallpaper_directory": {
+      "description": "Optional image folder override; leave empty to use Noctalia's wallpaper directory",
+      "label": "Wallpaper directory"
     },
     "sort_order": {
       "description": "How wallpapers are ordered in the browser",

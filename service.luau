@@ -28,6 +28,46 @@ local function joinPath(directory, name)
   return directory .. "/" .. name
 end
 
+local function parentDirectory(path)
+  local withoutTrailingSlash = path:gsub("/+$", "")
+  return withoutTrailingSlash:match("^(.*)/[^/]+$") or ""
+end
+
+local function usableDirectory(path)
+  if type(path) ~= "string" or path == "" then
+    return nil
+  end
+  local expanded = noctalia.expandPath(path):gsub("^file://", "")
+  local info = noctalia.fileInfo(expanded)
+  if info ~= nil and info.isDir == true then
+    return expanded
+  end
+  if info ~= nil and info.isDir ~= true then
+    local parent = parentDirectory(expanded)
+    local parentInfo = parent ~= "" and noctalia.fileInfo(parent) or nil
+    if parentInfo ~= nil and parentInfo.isDir == true then
+      return parent
+    end
+  end
+  return nil
+end
+
+local function resolveWallpaperDirectory()
+  local override = noctalia.getConfig("wallpaper_directory")
+  if type(override) == "string" and override ~= "" then
+    return usableDirectory(override), noctalia.expandPath(override)
+  end
+
+  local configured = noctalia.wallpaperDirectory()
+  local resolved = usableDirectory(configured)
+  if resolved ~= nil then
+    return resolved, configured
+  end
+
+  local fallback = noctalia.expandPath("~/Pictures/Wallpapers")
+  return usableDirectory(fallback), configured or fallback
+end
+
 local function publishError(message)
   noctalia.state.set("wallcards.items", {})
   noctalia.state.set("wallcards.error", message)
@@ -61,12 +101,13 @@ local function scan()
   noctalia.state.set("wallcards.status", "loading")
   noctalia.state.set("wallcards.error", "")
 
-  local directory = noctalia.wallpaperDirectory()
-  if type(directory) ~= "string" or directory == "" then
+  local directory, attemptedDirectory = resolveWallpaperDirectory()
+  if directory == nil then
+    noctalia.state.set("wallcards.directory", attemptedDirectory or "")
     publishError(noctalia.tr("errors.no_directory"))
     return
   end
-  directory = noctalia.expandPath(directory)
+  noctalia.state.set("wallcards.directory", directory)
 
   local names, listError = noctalia.listDir(directory)
   if names == nil then
@@ -95,7 +136,6 @@ local function scan()
   sortItems(items)
   persistIndex(items)
   noctalia.state.set("wallcards.items", items)
-  noctalia.state.set("wallcards.directory", directory)
   noctalia.state.set("wallcards.scannedAt", noctalia.nowMs())
   noctalia.state.set("wallcards.status", "ready")
 end

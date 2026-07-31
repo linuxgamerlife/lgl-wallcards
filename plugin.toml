@@ -17,20 +17,18 @@ description_key = "settings.live_preview.description"
 default = false
 
 [[setting]]
+key = "wallpaper_directory"
+type = "folder"
+label_key = "settings.wallpaper_directory.label"
+description_key = "settings.wallpaper_directory.description"
+default = ""
+
+[[setting]]
 key = "image_extensions"
 type = "string_list"
 label_key = "settings.image_extensions.label"
 description_key = "settings.image_extensions.description"
 default = ["png", "jpg", "jpeg", "webp"]
-
-[[setting]]
-key = "columns"
-type = "int"
-label_key = "settings.columns.label"
-description_key = "settings.columns.description"
-default = 3
-min = 2
-max = 5
 
 [[setting]]
 key = "sort_order"
