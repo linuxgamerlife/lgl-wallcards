@@ -7,11 +7,15 @@ large card grid.
 ## V5 Port Limitations
 
 This project is a functional adaptation of Wallcards for Noctalia v5, not a
-faithful reproduction of the original v4 interface. It has reached the
-practical limit of the current public v5 plugin API.
+faithful reproduction of the original v4 interface. Based on the currently
+available public documentation, API definitions, and official examples, the v5
+plugin API does not appear to provide everything required to reproduce that
+interface faithfully. This assessment may change as the API evolves or as
+additional implementation techniques become documented.
 
 Noctalia v5 plugins render host-owned, flex-based `ui.*` controls. The API does
-not currently expose the capabilities used by the original QML implementation:
+not currently appear to expose direct equivalents for several capabilities
+used by the original QML implementation:
 
 - custom full-screen plugin windows
 - absolute and overlapping card positioning
@@ -22,15 +26,38 @@ not currently expose the capabilities used by the original QML implementation:
 - mouse-wheel callbacks inside a plugin panel
 - equivalent control over keyboard focus and panel input
 
-As a result, this version must behave and look like a standard Noctalia panel.
-Its colours, spacing, controls, and static card hierarchy can be refined, but
-the original stacked, sheared, animated, wheel-controlled experience cannot be
-recreated with the current API.
+As a result, this version currently behaves and looks like a standard Noctalia
+panel. Its colours, spacing, controls, and static card hierarchy can be refined,
+but the original stacked, sheared, animated, wheel-controlled experience has
+not been reproducible using the documented API surface available during
+development.
 
-A faithful port will require additional Noctalia v5 APIs for absolute layout,
-transforms, animation, and panel pointer-wheel events. Until then, the original
-v4 plugin remains the complete visual implementation and this project provides
-the simplified v5 alternative.
+A faithful port may require additional Noctalia v5 APIs for absolute layout,
+transforms, animation, and panel pointer-wheel events, or an approach not
+covered by the currently available documentation and examples. The original v4
+plugin remains the complete visual implementation while this project provides
+a simplified v5 alternative.
+
+## AI-Assisted Development Notice
+
+This port was created primarily with the assistance of a large language model
+(LLM), using the legacy Wallcards source, the public Noctalia v5 documentation,
+local API definitions, and official plugin examples as references.
+
+LLM-generated code can contain incorrect assumptions, subtle defects, insecure
+patterns, or behavior that differs from its description. Although the project
+has passed Noctalia's offline plugin lint, that does not replace human review or
+runtime testing. Users and contributors should:
+
+- review changes before running or distributing them
+- test the plugin in a non-critical environment first
+- verify filesystem paths, external commands, and configuration values
+- avoid relying on the plugin for backups or preservation of important data
+- report unexpected behavior and validate fixes independently
+
+This software is provided without warranty, subject to the terms of its
+license. Neither the authors nor the tools used to assist development guarantee
+fitness, correctness, security, or compatibility with future Noctalia releases.
 
 ## Status
 
